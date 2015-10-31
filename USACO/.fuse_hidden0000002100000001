@@ -1,0 +1,71 @@
+/*
+ID: sanjay_4
+PROG: gift1
+LANG: C++
+*/
+
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <cstring>
+using namespace std;
+
+int main() {
+ifstream fin ("gift1.in");
+ofstream fout ("gift1.out");
+
+char np[12][16];
+int num;
+fin >> num;
+int i;
+	
+for (i = 0; i < num; i++) {
+fin >> np[i];
+}
+
+int x = 0;
+int j;
+int k = 0;
+char name[16];
+int sValues[12];
+int fValues[12];
+char friends[12][16];
+int friendNum;
+//DON'T FORGET i++
+while (x < num) {
+	fout << "1" << "\n";
+fin >> name;
+j = 0;
+while(j < num) {
+if (!strcmp(name, np[j])) break;
+j++;
+}
+	fscanf(fin, "%d %d", &sValues[j], &friendNum);
+	fout << sValues[j] << "\n";
+fValues[j] = sValues[j] % friendNum;
+for (int p = 0; p < (friendNum-1); p++) {
+fin >> friends[p];
+}
+while (k < num) {
+for (int q = 0; q < friendNum; q++) {
+if (np[k] == friends[q]) fValues[k] = sValues[k] + (sValues[j]/friendNum);
+}
+k++;
+}
+
+fout << friendNum << endl;
+fout << fValues[j] << "\n";
+x++;
+}
+int y = 0;
+while (y < num) {
+fout << np[y] << " " << (fValues[y] - sValues[y]) << endl;
+y++;
+}
+/*for (int z = 0; z < num; z++) {
+	fout << sValues[z];
+}*/
+
+
+return 0;
+}
